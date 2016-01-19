@@ -3,22 +3,27 @@ package ua.djhans;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.MissingResourceException;
 
 /**
  * Класс для генерации сообщений-приветствий.
- * Содержит статический метод выдающий сообщение, которое зависит от переданных методу
- * значения часа (в формате от 0 до 23) и локали. Если язык системы - русский, то сообщения
- * выводятся на русском, иначе - на английском.
- * Промежуточные данные при работе метода записываются в лог-файл messenger.log,
+ * Промежуточные данные при работе методов класса
+ * записываются в лог-файл messenger.log,
  * который создается в корневой папке проекта.
  */
 public class Messenger {
     private static Logger logger = LogManager.getLogger(Messenger.class);
 
+    /**
+     * Метод выдающий сообщение, которое зависит от переданных методу
+     * значения часа (в формате от 0 до 23) и локали.
+     * Если язык локали - русский, то сообщения
+     * выдаются на русском, иначе - на английском.
+     */
     public static String getMessage(int hour, Locale locale) {
         logger.debug("---getMessage() method begin---");
 
@@ -30,14 +35,28 @@ public class Messenger {
         locale = locale == null || !"ru".equals(locale.getLanguage()) ? Locale.ENGLISH : locale;
         logger.debug("Locale after validation: " + locale);
 
-        ResourceBundle bundle = ResourceBundle.getBundle("Messages", locale);
-        String message = bundle.getString(timeOfDay);
+        String message;
+        try {
+            logger.debug("Connecting to message resource...");
+            ResourceBundle bundle = ResourceBundle.getBundle("Messages", locale);
+            message = bundle.getString(timeOfDay);
+            logger.debug("Connection succeeded!");
+        } catch (MissingResourceException ex){
+            logger.debug("Connection failed!");
+            logger.debug("!!!" + ex.getClass().getName());
+            logger.debug("!!!" + ex.getMessage());
+            message = "Can't connect to message resource. Read messenger.log.";
+        }
         logger.debug("Returned message: " + message);
         logger.debug("----getMessage() method end----\n\r");
 
         return message;
     }
 
+    /**
+     * Метод определяет время суток по переданному значению
+     * часа (в формате от 0 до 23).
+     */
     private static String getTimeOfDay(int hour) {
         logger.debug("--getTimeOfDay() method begin--");
         String timeOfDay = "";
@@ -49,6 +68,12 @@ public class Messenger {
         return timeOfDay;
     }
 
+    /**
+     * Метод выводит в консоль сообщение-приветствие,
+     * соответсвующее текущему времени суток и локали пользователя.
+     * Если язык локали - русский, то сообщения
+     * выводятся на русском, иначе - на английском.
+     */
     public static void printCurrentTimeMessage() {
         int currentHour = new GregorianCalendar().get(Calendar.HOUR_OF_DAY);
         Locale userLocale = Locale.getDefault();
