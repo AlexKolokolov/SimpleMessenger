@@ -26,7 +26,6 @@ public class Messenger {
 
         logger.debug("Locale after validation: " + locale);
 
-        ResourceBundle bundle = ResourceBundle.getBundle("Messages", locale);
         String timeOfDay = "";
         if (currentHour >= 6 && currentHour < 9) timeOfDay = "morning";
         if (currentHour >= 9 && currentHour < 19) timeOfDay = "day";
@@ -35,6 +34,7 @@ public class Messenger {
 
         logger.debug("Time of day: " + timeOfDay);
 
+        ResourceBundle bundle = ResourceBundle.getBundle("Messages", locale);
         String message = bundle.getString(timeOfDay);
 
         logger.debug("Message to return: " + message);

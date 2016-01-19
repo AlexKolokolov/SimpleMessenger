@@ -15,7 +15,7 @@ public class MessengerTest {
         Locale locale = new Locale("ru");
         int hourOfDay = 4;
         String message = Messenger.getMessage(hourOfDay, locale);
-        Assert.assertEquals("Доброй ночи, Мир!", message);
+        Assert.assertEquals("Спокойной ночи, Мир!", message);
     }
 
     @Test
@@ -87,7 +87,7 @@ public class MessengerTest {
         Locale locale = new Locale("ru");
         int hourOfDay = -5;
         String message = Messenger.getMessage(hourOfDay, locale);
-        Assert.assertEquals("Доброй ночи, Мир!", message);
+        Assert.assertEquals("Спокойной ночи, Мир!", message);
     }
 
     @Test
