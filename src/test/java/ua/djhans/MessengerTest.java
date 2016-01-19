@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.Locale;
 
 /**
- * Класс содержит юнит-тесты для генератора сообщений
+ * Класс содержит юнит-тесты для метода getMessage(int hour, Locale locale) класса Messenger.
  */
 public class MessengerTest {
 
@@ -68,17 +68,15 @@ public class MessengerTest {
 
     @Test
     public void getMessageTestUnknown8() {
-        Locale locale = null;
         int hourOfDay = 8;
-        String message = Messenger.getMessage(hourOfDay, locale);
+        String message = Messenger.getMessage(hourOfDay, null);
         Assert.assertEquals("Good morning, World!", message);
     }
 
     @Test
     public void getMessageTestUnknown20() {
-        Locale locale = null;
         int hourOfDay = 20;
-        String message = Messenger.getMessage(hourOfDay, locale);
+        String message = Messenger.getMessage(hourOfDay, null);
         Assert.assertEquals("Good evening, World!", message);
     }
 
@@ -92,9 +90,8 @@ public class MessengerTest {
 
     @Test
     public void getMessageTestUnknownWrongTime() {
-        Locale locale = null;
         int hourOfDay = 50;
-        String message = Messenger.getMessage(hourOfDay, locale);
+        String message = Messenger.getMessage(hourOfDay, null);
         Assert.assertEquals("Good night, World!", message);
     }
 }
