@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration>
+    <appenders>
+        <File name="FILE" fileName="messenger.log">
+            <PatternLayout pattern="%d{ISO8601} [%-5p] (%F:%L) - %m%n" charset="UTF-8" />
+        </File>
+    </appenders>
+    <loggers>
+        <root level="debug">
+            <appender-ref ref="FILE"/>
+        </root>
+    </loggers>
+</Configuration>

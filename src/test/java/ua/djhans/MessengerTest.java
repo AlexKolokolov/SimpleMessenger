@@ -6,13 +6,13 @@ import org.junit.Test;
 import java.util.Locale;
 
 /**
- * Created by Administrator on 19.01.2016.
+ * Класс содержит юнит-тесты для генератора сообщений
  */
 public class MessengerTest {
 
     @Test
     public void getMessageTestRu4() {
-        Locale locale = new Locale("ru", "RU");
+        Locale locale = new Locale("ru");
         int hourOfDay = 4;
         String message = Messenger.getMessage(hourOfDay, locale);
         Assert.assertEquals("Доброй ночи, Мир!", message);
@@ -20,7 +20,7 @@ public class MessengerTest {
 
     @Test
     public void getMessageTestRu6() {
-        Locale locale = new Locale("ru", "RU");
+        Locale locale = new Locale("ru");
         int hourOfDay = 6;
         String message = Messenger.getMessage(hourOfDay, locale);
         Assert.assertEquals("Доброе утро, Мир!", message);
@@ -28,7 +28,7 @@ public class MessengerTest {
 
     @Test
     public void getMessageTestRu12() {
-        Locale locale = new Locale("ru", "RU");
+        Locale locale = new Locale("ru");
         int hourOfDay = 12;
         String message = Messenger.getMessage(hourOfDay, locale);
         Assert.assertEquals("Добрый день, Мир!", message);
@@ -84,7 +84,7 @@ public class MessengerTest {
 
     @Test
     public void getMessageTestRuWrongTime() {
-        Locale locale = new Locale("ru", "RU");
+        Locale locale = new Locale("ru");
         int hourOfDay = -5;
         String message = Messenger.getMessage(hourOfDay, locale);
         Assert.assertEquals("Доброй ночи, Мир!", message);
