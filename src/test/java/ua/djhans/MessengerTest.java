@@ -11,7 +11,7 @@ import java.util.Locale;
 public class MessengerTest {
 
     @Test
-    public void getMessageTestRuNight() {
+    public void getMessageTestRu4() {
         Locale locale = new Locale("ru", "RU");
         int hourOfDay = 4;
         String message = Messenger.getMessage(hourOfDay, locale);
@@ -19,7 +19,15 @@ public class MessengerTest {
     }
 
     @Test
-    public void getMessageTestRuDay() {
+    public void getMessageTestRu6() {
+        Locale locale = new Locale("ru", "RU");
+        int hourOfDay = 6;
+        String message = Messenger.getMessage(hourOfDay, locale);
+        Assert.assertEquals("Доброе утро, Мир!", message);
+    }
+
+    @Test
+    public void getMessageTestRu12() {
         Locale locale = new Locale("ru", "RU");
         int hourOfDay = 12;
         String message = Messenger.getMessage(hourOfDay, locale);
@@ -27,18 +35,66 @@ public class MessengerTest {
     }
 
     @Test
-    public void getMessageTestEnNight() {
+    public void getMessageTestEn8() {
         Locale locale = Locale.ENGLISH;
-        int hourOfDay = 4;
+        int hourOfDay = 8;
         String message = Messenger.getMessage(hourOfDay, locale);
-        Assert.assertEquals("Good night, World!", message);
+        Assert.assertEquals("Good morning, World!", message);
     }
 
     @Test
-    public void getMessageTestEnDay() {
+    public void getMessageTestEn22() {
         Locale locale = Locale.ENGLISH;
-        int hourOfDay = 12;
+        int hourOfDay = 22;
         String message = Messenger.getMessage(hourOfDay, locale);
-        Assert.assertEquals("Good day, World!", message);
+        Assert.assertEquals("Good evening, World!", message);
+    }
+
+    @Test
+    public void getMessageTestDe7() {
+        Locale locale = Locale.GERMAN;
+        int hourOfDay = 7;
+        String message = Messenger.getMessage(hourOfDay, locale);
+        Assert.assertEquals("Good morning, World!", message);
+    }
+
+    @Test
+    public void getMessageTestDe19() {
+        Locale locale = Locale.GERMAN;
+        int hourOfDay = 19;
+        String message = Messenger.getMessage(hourOfDay, locale);
+        Assert.assertEquals("Good evening, World!", message);
+    }
+
+    @Test
+    public void getMessageTestUnknown8() {
+        Locale locale = null;
+        int hourOfDay = 8;
+        String message = Messenger.getMessage(hourOfDay, locale);
+        Assert.assertEquals("Good morning, World!", message);
+    }
+
+    @Test
+    public void getMessageTestUnknown20() {
+        Locale locale = null;
+        int hourOfDay = 20;
+        String message = Messenger.getMessage(hourOfDay, locale);
+        Assert.assertEquals("Good evening, World!", message);
+    }
+
+    @Test
+    public void getMessageTestRuWrongTime() {
+        Locale locale = new Locale("ru", "RU");
+        int hourOfDay = -5;
+        String message = Messenger.getMessage(hourOfDay, locale);
+        Assert.assertEquals("Доброй ночи, Мир!", message);
+    }
+
+    @Test
+    public void getMessageTestUnknownWrongTime() {
+        Locale locale = null;
+        int hourOfDay = 50;
+        String message = Messenger.getMessage(hourOfDay, locale);
+        Assert.assertEquals("Good night, World!", message);
     }
 }

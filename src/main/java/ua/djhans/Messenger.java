@@ -14,6 +14,7 @@ public class Messenger {
     public static String getMessage(int currentHour, Locale locale) {
 
         locale = locale == null || !"ru".equals(locale.getLanguage()) ? Locale.ENGLISH : locale;
+        currentHour = currentHour > 23 || currentHour < 0 ? 0 : currentHour;
 
         ResourceBundle bundle = ResourceBundle.getBundle("Messages", locale);
         String timeOfDay = "";
