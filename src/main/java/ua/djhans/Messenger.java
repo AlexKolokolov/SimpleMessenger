@@ -28,7 +28,7 @@ public class Messenger {
         logger.debug("---getMessage() method begin---");
 
         logger.debug("Got current hour: " + hour);
-        String timeOfDay = getTimeOfDay(hour);
+        String timeOfDay = defineTimeOfDay(hour);
         logger.debug("Current time of day: " + timeOfDay);
 
         logger.debug("Got user's locale: " + locale);
@@ -57,14 +57,14 @@ public class Messenger {
      * Метод определяет время суток по переданному значению
      * часа (в формате от 0 до 23).
      */
-    private static String getTimeOfDay(int hour) {
-        logger.debug("--getTimeOfDay() method begin--");
+    private static String defineTimeOfDay(int hour) {
+        logger.debug("--defineTimeOfDay() method begin--");
         String timeOfDay = "";
         if (hour >= 6 && hour < 9) timeOfDay = "morning";
         if (hour >= 9 && hour < 19) timeOfDay = "day";
         if (hour >= 19 && hour < 23) timeOfDay = "evening";
         if (hour >= 23 || hour < 6) timeOfDay = "night";
-        logger.debug("---getTimeOfDay() method end---");
+        logger.debug("---defineTimeOfDay() method end---");
         return timeOfDay;
     }
 
